@@ -810,6 +810,13 @@ pointers notes
     // & address-of operator
     // * dereference operator
 
+    // either
+    // int *abc = &xyz;
+    // or
+    // abc = &xyz; -> same result.
+    // or
+    // *abc = 123
+
     int main()
     {
 
@@ -826,4 +833,494 @@ pointers notes
         return 0;
     }
 
+*/
+
+/*
+Null pointers notes
+
+    #include <iostream>
+
+    // Null value = a special value that means something has no value.
+
+    // nullptr = keyword represents a null pointer literal
+
+    // nullptrs are helpful when determining if an address was successfully assigned to a pointer.
+
+    // make sure the code isn't dereferencing null or pointing to free memory.
+
+    // this causes undefined behavior
+
+    int main()
+    {
+
+        int *pointer = nullptr;
+        int x = 123;
+
+        pointer = &x;
+
+        if (pointer == nullptr)
+        {
+            std::cout << "address was not assigned!\n";
+        }
+        else
+        {
+            std::cout << "address was assigned!\n";
+        }
+        return 0;
+    }
+*/
+
+/*
+Dynamic Memory Notes
+
+    #include <iostream>
+
+    // dynamic memory = Memory that is allocated after the program is
+    //                  already compiled & running.
+    //                  Use the 'new' operator to allocate
+    //                  memory in the heap rather than the stack.
+
+    int main()
+    {
+        int *pNum = NULL;
+
+        pNum = new int;
+
+        *pNum = 21;
+
+        std::cout << "address: " << pNum << '\n';
+        std::cout << "Value:" << *pNum << '\n';
+
+        char *pGrades = NULL;
+        int size;
+
+        std::cout << "How many grades to enter in?: ";
+        std::cin >> size;
+
+        pGrades = new char[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            std::cout << "Enter grade #" << i + 1 << ": ";
+            std::cin >> pGrades[i];
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            std::cout << pGrades[i] << " ";
+        }
+
+        delete[] pGrades;
+
+        return 0;
+    }
+    */
+/*
+Recursion Notes
+
+ #include <iostream>
+ // iterative vs recursive : just repeat or make it invoke within to make it cleaner.
+ //                          but this requires more memory -> slower.
+ void walk(int steps);
+ int main()
+ {
+     walk(10);
+
+     return 0;
+ }
+
+ void walk(int steps)
+ {
+     if (steps > 0)
+     {
+         std::cout << "You take a step!\n";
+         walk(steps - 1);
+     }
+ }
+ */
+/*
+Function template Notes
+    #include <iostream>
+
+    template <typename T, typename U>
+    // "auto" automatially assigns and compares types.
+    // if x and y are same types, just use T max(T x, T y);
+    auto max(T x, U y)
+    {
+        return (x > y) ? x : y; // if x > y? return x. If not, return y.
+    }
+    int main()
+    {
+        std::cout << max(1, 2.1) << '\n';
+
+        return 0;
+    }
+
+*/
+
+/*
+Struct Notes
+
+    #include <iostream>
+
+    struct student
+    {
+        std::string name;
+        double gpa;
+        bool enrolled;
+    }; // struct should end with a semicolon
+
+    int main()
+    {
+
+        student student1;
+        student1.name = "Bro";
+        student1.gpa = 3.2;
+        student1.enrolled = true;
+
+        std::cout << student1.name << '\n';
+        std::cout << student1.gpa << '\n';
+        std::cout << student1.enrolled << '\n';
+
+        return 0;
+    }
+*/
+
+/*
+Structs as arguments Notes
+
+    #include <iostream>
+
+    struct Car
+    {
+        std::string model;
+        int year;
+        std::string color;
+    };
+    void printCar(Car &car);
+    void paintCar(Car &car, std::string color);
+    int main()
+    {
+        Car car1;
+        Car car2;
+
+        car1.model = "Toyota";
+        car1.year = 2020;
+        car1.color = "Red";
+
+        car2.model = "Honda";
+        car2.year = 2021;
+        car2.color = "Blue";
+
+        paintCar(car1, "silver");
+        paintCar(car2, "gold");
+
+        std::cout << &car1 << '\n'; // Print the address of car1
+        printCar(car1);
+        printCar(car2);
+
+        return 0;
+    }
+    void printCar(Car &car)
+    {
+        // When you pass a struct to a function, it is passed by value by default.
+        // To pass by reference, put an '&' before the parameter type in the function definition.
+        std::cout << &car << '\n';
+        std::cout << car.model << '\n';
+        std::cout << car.year << '\n';
+        std::cout << car.color << '\n';
+    }
+    void paintCar(Car &car, std::string color)
+    {
+        car.color = color;
+    }
+*/
+
+/*
+Enum Notes
+
+    #include <iostream>
+
+    enum Day
+    {
+        sunday = 0,
+        monday = 1,
+        tuesday = 2,
+        wednesday = 3,
+        thursday = 4,
+        friday = 5,
+        saturday = 6
+    };
+
+    enum Flavor
+    {
+        chocolate,
+        vanilla,
+        strawberry,
+        mint,
+        cookies_and_cream
+    };
+    // Capitalize enum names. Each value is an integer starting from 0 by default.
+
+    int main()
+    {
+
+        Day today = sunday;
+
+        switch (today)
+        {
+        case sunday:
+            std::cout << "Today is Sunday!\n";
+            break;
+        case monday:
+            std::cout << "Today is Monday!\n";
+            break;
+        case tuesday:
+            std::cout << "Today is Tuesday!\n";
+            break;
+        case wednesday:
+            std::cout << "Today is Wednesday!\n";
+            break;
+        case thursday:
+            std::cout << "Today is Thursday!\n";
+            break;
+        case friday:
+            std::cout << "Today is Friday!\n";
+            break;
+        case saturday:
+            std::cout << "Today is Saturday!\n";
+            break;
+
+            return 0;
+        }
+    }
+*/
+
+/*
+Classes & Objects Notes
+    #include <iostream>
+
+    // Classes have attributes (variables) and methods (functions).
+    class Car
+    {
+    public:
+        // Attributes(you can preassign values to create clones)
+        std::string make;
+        std::string model;
+        int year;
+        std::string color;
+
+        // Methods
+        void accelerate()
+        {
+            std::cout << "You step on the gas pedal.\n";
+        }
+        void brake()
+        {
+            std::cout << "You step on the brake pedal.\n";
+        }
+    };
+
+    int main()
+    {
+        Car car1;
+
+        car1.make = "Toyota";
+        car1.model = "Corolla";
+        car1.year = 2020;
+        car1.color = "Red";
+
+        std::cout << car1.make << '\n';
+        std::cout << car1.model << '\n';
+        std::cout << car1.year << '\n';
+        std::cout << car1.color << '\n';
+
+        car1.accelerate();
+        car1.brake();
+
+        return 0;
+    }
+*/
+
+/*
+Constructors Notes
+
+    #include <iostream>
+
+    class Student
+    {
+    public:
+        std::string name;
+        int age;
+        double gpa;
+
+        //    Student(std::string x, int y, double z)
+        //   {
+        //      name = x;
+        //        age = y;
+        //        gpa = z;
+        //    }
+
+        //    or
+
+        Student(std::string name, int age, double gpa)
+        {
+            this->name = name; // this->[public variable] = [value passed];
+            this->age = age;
+            this->gpa = gpa;
+        }
+    };
+
+    int main()
+    {
+        Student student1("SpongeBob", 20, 3.5);
+
+        std::cout << student1.name << '\n';
+        std::cout << student1.age << '\n';
+        std::cout << student1.gpa << '\n';
+
+        return 0;
+    }
+*/
+
+/*
+Overloading Constructors Notes
+
+    #include <iostream>
+
+    // multiple constructors are possible when the parameters are different
+    class Pizza
+    {
+    public:
+        std::string topping1;
+        std::string topping2;
+
+        Pizza()
+        {
+            // empty constructor
+        }
+        Pizza(std::string topping1)
+        {
+            this->topping1 = topping1;
+        }
+
+        Pizza(std::string topping1, std::string topping2)
+        {
+            this->topping1 = topping1;
+            this->topping2 = topping2;
+        }
+    };
+
+    int main()
+    {
+        Pizza pizza1("pepperoni");
+        Pizza pizza2("mushrooms", "peppers");
+        Pizza pizza3;
+
+        std::cout << pizza1.topping1 << '\n';
+        std::cout << pizza2.topping1 << " and " << pizza2.topping2 << '\n';
+
+        return 0;
+    }
+*/
+
+/*
+Getters and Setters Notes
+
+    #include <iostream>
+
+    class Stove
+    {
+        // private variables and methods are not accessible outside the class
+    private:
+        int temperature = 0;
+
+    public:
+        // public variables and methods are accessible outside the class
+        // getter method to access the private variable
+        // setter method to modify the private variable
+        int getTemperature()
+        {
+            return temperature;
+        }
+        void setTemperature(int temperature)
+        {
+            if (temperature < 0)
+            {
+                this->temperature = 0;
+            }
+            else if (temperature >= 10)
+            {
+                this->temperature = 10;
+            }
+            else
+            {
+                this->temperature = temperature;
+            }
+        }
+    };
+    int main()
+    {
+        Stove stove;
+
+        // stove.temperature = 1000000;
+        int temp;
+        std::cout << "Enter the temperature setting for the stove: ";
+        std::cin >> temp;
+        stove.setTemperature(temp);
+
+        std::cout << "The temperature setting is: " << stove.getTemperature() << '\n';
+
+        return 0;
+    }
+
+*/
+
+/*
+Inheritance Notes
+    #include <iostream>
+
+    class Animal
+    {
+    public:
+        bool alive = true;
+        void eat()
+        {
+            std::cout << "This animal is eating.\n";
+        }
+    };
+
+    class Dog : public Animal
+    {
+    public:
+        void bark()
+        {
+            std::cout << "Woof!\n";
+        }
+    };
+
+    class Cat : public Animal
+    {
+    public:
+        void meow()
+        {
+            std::cout << "Meow!\n";
+        }
+    };
+
+    int main()
+    {
+        Dog dog;
+        Cat cat;
+
+        std::cout << dog.alive << '\n';
+        dog.eat();
+        dog.bark();
+
+        std::cout << cat.alive << '\n';
+        cat.eat();
+        cat.meow();
+
+        return 0;
+    }
 */
