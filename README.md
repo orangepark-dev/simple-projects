@@ -9,3 +9,4 @@ repository for small block of codes, mainly for language practice
 - Codes under this folder were created following BTC demy's _The Bitcoiner's Intro to Rust_ course.
 - The course aims to create a bitcoin transaction decoder from scratch.
 - Link to the course : [https://btcdemy.thinkific.com/](https://btcdemy.thinkific.com/)
+- Link to the GitHub version : [https://github.com/bitcoin-dev-project/bitcoiner-intro-to-rust](https://github.com/bitcoin-dev-project/bitcoiner-intro-to-rust)
